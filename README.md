@@ -1,0 +1,1 @@
+## i18n-collect ast方案
