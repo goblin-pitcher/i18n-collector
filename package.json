@@ -1,0 +1,27 @@
+{
+  "name": "i18n-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "i18n-test": "bin/i18n-cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/generator": "^7.13.9",
+    "@babel/parser": "^7.13.13",
+    "@babel/traverse": "^7.13.13",
+    "@babel/types": "^7.13.14",
+    "htmlparser2": "^6.1.0",
+    "lodash": "^4.17.21",
+    "posthtml": "^0.15.1"
+  },
+  "devDependencies": {
+    "yargs-parser": "^20.2.7"
+  }
+}
