@@ -56,6 +56,7 @@
 <script>
 import commonMapList from '@/utils/data-map.utils';
 import videoService from './videotape-analysis/videotape-analysis.service';
+import func from "@/utils/i18n.utils"
 
 const test='人脸库'
 export default {
