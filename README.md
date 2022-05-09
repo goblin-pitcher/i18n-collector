@@ -1,5 +1,7 @@
 ## `vue` `i18n-collect`工具开发
 
+> 具体效果可以在`npm install`后，执行`npm run test`，对比examples文件夹中文件的变化
+
 老项目引入`i18n`国际化后，需要对项目中所有中文包裹`$t('中文')`方法，对象不同，包裹的方法也有差异：
 
 1. 在`vue`的`template`中，直接对中文包裹`$t('中文')`
@@ -49,7 +51,7 @@ npx i18n-collect
 新建`i18n-collect.config.js`文件可传入具体配置，默认配置如下：
 
 ````javascript
-const defConfig = {
+module.exports = {
   // 转换当前目录下的文件
   dir: './',
   // 忽略项
