@@ -5,32 +5,24 @@ const { merge } = require("lodash");
 const FileHandler = require("./lib/file-handler");
 const FileTraverse = require("./lib/utils/file-traverse");
 const lint = require("./lib/utils/run-lint");
+const { rplArrayMerge } = require('./lib/utils/common');
+const getConfig = require('./lib/get-config');
 
 const exists = promisify(fs.exists);
 const mkdir = promisify(fs.mkdir);
 const writeFile = promisify(fs.writeFile);
-const fileHandlerOption = {
-  template: { prefix: "$t" },
-  js: {
-    addImport: {
-      from: "@/utils/i18n.utils",
-      data: ["i18n"],
-    },
-    prefix: "i18n.t",
-  },
-  vue: { prefix: "this.$t", sparePrefix: 'i18n.t' },
-};
 
 class I18nCollect {
   constructor(options) {
-    this._fileHandler = new FileHandler(fileHandlerOption);
+    options = rplArrayMerge({}, getConfig(), options);
+    this._fileHandler = new FileHandler(options.file);
     this._collection = {};
     this._errorPath = [];
     this._statusSet = new Set();
     this._fix = options.fix;
-    this._ignore = options.ignore || [];
-    this._path = options.path || "";
-    const fileNameArr = (options.fileName || "").split(".");
+    this._ignore = options.ignoredir || [];
+    this._path = options.dir || "";
+    const fileNameArr = (options.output || "").split(".");
     const lang = fileNameArr.slice(0, fileNameArr.length - 1).join(".");
     this._i18nFileTemp = Object.freeze({
       lang,
@@ -109,8 +101,19 @@ class I18nCollect {
     fileTraverse.traverse(this._path);
   }
 }
-const getLang = (dir, ignoredir = [], fileName = "zh-CN.js", fix = true) => {
-  const collect = new I18nCollect({ path: path.resolve(dir), ignore: ignoredir, fileName, fix });
+const getLang = (dir, ignoredir, fix) => {
+  let cmdConfig = {
+    dir,
+    ignoredir,
+    fix,
+  };
+  cmdConfig = Object.keys(cmdConfig).reduce((o, key)=>{
+    if(![undefined, null].includes(cmdConfig[key])) {
+      o[key] = cmdConfig[key]
+    }
+    return o
+  }, {})
+  const collect = new I18nCollect(cmdConfig);
   collect.exec();
 };
 // getLang("./examples");

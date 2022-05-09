@@ -1,16 +1,16 @@
 {
-  "name": "i18n-test",
+  "name": "i18n-collector",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "bin": {
-    "i18n-test": "bin/i18n-cli.js"
+    "i18n-collect": "bin/i18n-cli.js"
   },
   "scripts": {
     "test": "node .\\bin\\i18n-cli.js collect -d .\\examples\\ -f false"
   },
   "keywords": [],
-  "author": "",
+  "author": "xiao.wei",
   "license": "ISC",
   "dependencies": {
     "@babel/generator": "^7.13.9",
