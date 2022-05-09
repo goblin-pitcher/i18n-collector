@@ -7,7 +7,7 @@
     "i18n-test": "bin/i18n-cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node .\\bin\\i18n-cli.js collect -d .\\examples\\ -f false"
   },
   "keywords": [],
   "author": "",

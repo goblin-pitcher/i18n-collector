@@ -110,8 +110,8 @@ class I18nCollect {
   }
 }
 const getLang = (dir, ignoredir = [], fileName = "zh-CN.js", fix = true) => {
-  const collect = new I18nCollect({ path: dir, ignore: ignoredir, fileName, fix });
+  const collect = new I18nCollect({ path: path.resolve(dir), ignore: ignoredir, fileName, fix });
   collect.exec();
 };
 // getLang("./examples");
-exports.getLang = getLang;
+module.exports = getLang;

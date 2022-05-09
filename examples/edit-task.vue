@@ -1,12 +1,12 @@
 <template>
   <div class="vsr-dialog-wrap" v-if="isEditShow">
-    <meg-dialog :visible="isEditShow" :width="'640px'" title="编辑任务" @close="closeClick">
+    <el-dialog :visible="isEditShow" :width="'640px'" title="编辑任务" @close="closeClick">
       <div v-loading="loading" class="show-detail">
         <div class="plan-left">
           <div class="vsr-dialog-content">
             <div class="wrap input-width">
               <span class="label">任务名称</span>
-              <meg-input v-model="taskname"></meg-input>
+              <el-input v-model="taskname"></el-input>
             </div>
             <div class="wrap">
               <span class="label">解析类型</span>
@@ -16,18 +16,18 @@
             </div>
             <div class="wrap input-width">
               <span class="label">解析倍速</span>
-              <meg-input v-model="detailData.speed"></meg-input>
+              <el-input v-model="detailData.speed"></el-input>
             </div>
             <div class="wrap">
               <span class="label">优先级</span>
-              <meg-radio-group v-model="detailData.priority">
-                <meg-radio :label="1">
+              <el-radio-group v-model="detailData.priority">
+                <el-radio :label="1">
                   一般任务
-                </meg-radio>
-                <meg-radio :label="0">
+                </el-radio>
+                <el-radio :label="0">
                   紧急任务
-                </meg-radio>
-              </meg-radio-group>
+                </el-radio>
+              </el-radio-group>
             </div>
             <div class="wrap">
               <span class="label">自动比对</span>
@@ -40,23 +40,22 @@
               <span class="label">比对目标</span>
               <div class="con">
                 <span>{{ '布控库' }}</span>
-                <meg-input :value="albumsText" type="textarea" readonly :rows="6"></meg-input>
+                <el-input :value="albumsText" type="textarea" readonly :rows="6"></el-input>
               </div>
             </div>
           </div>
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <meg-button type="primary" :loading="btnLoading" :disabled="loading" @click="saveEdit">{{ '保存' }}</meg-button>
-        <meg-button @click.native="closeClick">{{ '取消' }}</meg-button>
+        <el-button type="primary" :loading="btnLoading" :disabled="loading" @click="saveEdit">{{ '保存' }}</el-button>
+        <el-button @click.native="closeClick">{{ '取消' }}</el-button>
       </span>
-    </meg-dialog>
+    </el-dialog>
   </div>
 </template>
 <script>
 import commonMapList from '@/utils/data-map.utils';
 import videoService from './videotape-analysis/videotape-analysis.service';
-import func from "@/utils/i18n.utils"
 
 const test='人脸库'
 export default {
@@ -103,7 +102,7 @@ export default {
         if (data.length) {
           const val = data.map(item => {
             const name = item.albumName || item.name;
-            const thres = item.threshold ? `, this.$t('阈值'):${item.threshold}` : '';
+            const thres = item.threshold ? `, test_$t_format.$t('阈值'):${item.threshold}` : '';
             const str = name ? `${name + thres};` : '';
             return str;
           }).join('');
@@ -150,7 +149,7 @@ export default {
 
       if (code === 0 && data) {
         this.$message.error({
-          message: this.$t('任务名称重复'),
+          message: '任务名称重复',
           showClose: true
         });
         return true;
@@ -243,7 +242,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-  .meg-dialog__body{
+  .el-dialog__body{
     padding-bottom: 20px;
   }
   .vsr-dialog-content {
@@ -265,7 +264,7 @@ export default {
         color: #435068;
       }
     }
-    .meg-input,.meg-radio-group {
+    .el-input,.el-radio-group {
       flex: 1;
       ::v-deep input {
         width: 270px;
